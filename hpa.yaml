@@ -1,3 +1,5 @@
+# defines a Horizontal Pod Autoscaler to scale the number of replicas
+
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -9,4 +11,7 @@ spec:
     name: myapp
   minReplicas: 1         # Minimum number of replicas
   maxReplicas: 10        # Maximum number of replicas
-  targetCPUUtilizationPercentage: 5  # Target CPU utilization for scaling
+  targetCPUUtilizationPercentage: 5  # ensure that the average CPU utilization across all pods remains close to 5%
+
+  # if the CPU utilization percentage is higher, HPA will increase the number of replicas.
+  # if it is lower, it will decrease the number of replicas within  the specified range of 1 to 10 replicas
