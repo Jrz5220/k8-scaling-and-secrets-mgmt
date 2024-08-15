@@ -1,3 +1,5 @@
+# Defines a Vertical Pod Autoscaler (VPA) configuration
+
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
@@ -8,4 +10,14 @@ spec:
     kind: Deployment
     name: myapp
   updatePolicy:
-    updateMode: "Auto"  # VPA will automatically update the resource requests and limits
+    updateMode: "Auto"  # VPA will automatically update the resource requests and limits for the pods in this deployment
+
+# apply the VPA configuration using the following command:
+# kubectl apply -f vpa.yaml
+
+# Retrieve the created VPA:
+# kubectl get vpa
+
+# retrieve the details and current status of the VPA:
+# kubectl describe vpa myvpa
+# the output is providing recommendations for CPU and memory
